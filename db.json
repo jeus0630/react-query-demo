@@ -4,7 +4,7 @@
             "id": 1,
             "name": "Batman",
             "alterEgo": "Bruce Wanye"
-        },
+        }, 
         {
             "id": 2,
             "name": "Superman",
@@ -14,6 +14,6 @@
             "id": 3,
             "name": "Wonder Woman",
             "alterEgo": "Princess Diana"
-        },
+        }
     ]
 }
