@@ -19,6 +19,14 @@ export default function SuperHeroesPage(){
         })
     }, [])
 
+    if(isLoading){
+        return (
+            <div>
+                ...isLoading
+            </div>
+        )
+    }
+
     return(
         <div>
             <h2>SuperHeroes</h2>
