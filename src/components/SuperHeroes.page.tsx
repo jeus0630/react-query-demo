@@ -11,10 +11,16 @@ export default function SuperHeroesPage(){
 
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<DataType[]>([]);
-    
+    const [error, setError] = useState('');
+
     useEffect(() => {
-        axios.get('http://localhost:4000/superheroes').then(res => {
+        axios.get('http://localhost:4000/superheroes1')
+        .then(res => {
             setData(res.data);
+            setIsLoading(false);
+        })
+        .catch((err) => {
+            setError(err.message);
             setIsLoading(false);
         })
     }, [])
@@ -23,6 +29,14 @@ export default function SuperHeroesPage(){
         return (
             <div>
                 ...isLoading
+            </div>
+        )
+    }
+
+    if(error){
+        return (
+            <div>
+                {error}
             </div>
         )
     }
