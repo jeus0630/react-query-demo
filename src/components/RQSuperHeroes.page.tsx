@@ -1,14 +1,24 @@
 import { useQuery } from "react-query"
-import axios from 'axios';
+import { getSuperHeroes } from "../api/superheroes";
 
+type HeroesType = {
+    id: number,
+    name: string,
+    alterEgo: string
+}[]
+ 
 export default function RQSuperHeroesPage(){
-    const results =  useQuery('super-heroes', () => {
-        return axios.get('http://localhost:4000/superheroes');
-    });
+    const {isLoading, data } =  useQuery<HeroesType>('super-heroes', getSuperHeroes); 
+
+    if(isLoading){
+        return <h2>Loading...</h2>
+    }
 
     return (
-        <div>
-            {JSON.stringify(results)}
-        </div>
+        <>
+            {
+                data?.map((hero) => (<div key={hero.name}>{hero.name}</div>))
+            }
+        </>
     )
 }

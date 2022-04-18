@@ -11,7 +11,7 @@ export default function SuperHeroesPage(){
 
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<DataType[]>([]);
-
+    
     useEffect(() => {
         axios.get('http://localhost:4000/superheroes').then(res => {
             setData(res.data);
