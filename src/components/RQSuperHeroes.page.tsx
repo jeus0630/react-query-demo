@@ -8,10 +8,14 @@ type HeroesType = {
 }[]
  
 export default function RQSuperHeroesPage(){
-    const {isLoading, data } =  useQuery<HeroesType>('super-heroes', getSuperHeroes); 
+    const {isLoading, data, isError, error} =  useQuery<HeroesType, any>('super-heroes', getSuperHeroes); 
 
     if(isLoading){
         return <h2>Loading...</h2>
+    }
+
+    if(isError){
+        return <h2>{error.message}</h2>
     }
 
     return (
