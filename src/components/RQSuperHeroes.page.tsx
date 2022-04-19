@@ -10,9 +10,11 @@ type HeroesType = {
 export default function RQSuperHeroesPage(){
     const {isLoading, data, isError, error} =  useQuery<HeroesType, any>('super-heroes', getSuperHeroes,{
         cacheTime: 50000, // default: 5mins
-        staleTime: 10000, // default: 0
+        staleTime: 0, // default: 0
         refetchOnMount: false, // default: true
-        refetchOnWindowFocus: false, // default: true
+        refetchOnWindowFocus: true, // default: true
+        refetchInterval: 1000, // default: false
+        refetchIntervalInBackground: true // default: false
     }); 
 
     if(isLoading){
