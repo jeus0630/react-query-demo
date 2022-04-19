@@ -8,13 +8,8 @@ type HeroesType = {
 }[]
  
 export default function RQSuperHeroesPage(){
-    const {isLoading, data, isError, error} =  useQuery<HeroesType, any>('super-heroes', getSuperHeroes,{
-        cacheTime: 50000, // default: 5mins
-        staleTime: 0, // default: 0
-        refetchOnMount: false, // default: true
-        refetchOnWindowFocus: true, // default: true
-        refetchInterval: 1000, // default: false
-        refetchIntervalInBackground: true // default: false
+    const {isLoading, data, isError, error, refetch} =  useQuery<HeroesType, any>('super-heroes', getSuperHeroes,{
+        enabled: false,
     }); 
 
     if(isLoading){
@@ -27,6 +22,7 @@ export default function RQSuperHeroesPage(){
 
     return (
         <>
+            <button onClick={() => refetch()}>Fetch Heroes</button>
             {
                 data?.map((hero) => (<div key={hero.name}>{hero.name}</div>))
             }
