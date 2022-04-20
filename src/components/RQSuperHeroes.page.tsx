@@ -1,32 +1,8 @@
-import { useState } from "react";
-import { useQuery } from "react-query"
-import { getSuperHeroes } from "../api/superheroes";
-
-type HeroesType = {
-    id: number,
-    name: string,
-    alterEgo: string
-}[]
+import useSuperHeroesData from "../hooks/useSuperHeroesData";
  
 export default function RQSuperHeroesPage(){
 
-    const [polling, setPolling] = useState(1000);
-
-    const onSuccess = (data: HeroesType) => {
-        if(data.length === 4){
-            setPolling(0);
-        }
-    }
-
-    const onError = () => {
-        setPolling(0);
-    }
-
-    const {isLoading, data, isError, error, refetch} =  useQuery<HeroesType, any>('super-heroes', getSuperHeroes,{
-        refetchInterval: polling,
-        onSuccess,
-        onError
-    }); 
+    const {data, isLoading, isError, error, refetch} = useSuperHeroesData();
 
     if(isLoading){
         return <h2>Loading...</h2>
@@ -36,8 +12,13 @@ export default function RQSuperHeroesPage(){
         return <h2>{error.message}</h2>
     }
 
+    const clickHandler = () => {
+        refetch();
+    }
+
     return (
         <>
+            <button onClick={clickHandler}>Click</button>
             {
                 data?.map((hero) => (<div key={hero.name}>{hero.name}</div>))
             }
