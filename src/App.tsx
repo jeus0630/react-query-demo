@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SuperHeroesPage from './components/SuperHeroes.page';
 import RQSuperHeroesPage from './components/RQSuperHeroes.page';
 import HomePage from './components/Home.page';
+import RQSuperHeroPage from './components/RQSuperHero.page';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             </ul>
           </nav>
           <Routes>
+            <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage></RQSuperHeroPage>}></Route>
             <Route path='/super-heroes' element={<SuperHeroesPage />}/>
             <Route path='/rq-super-heroes' element={<RQSuperHeroesPage />}/>
             <Route path='/' element={<HomePage />}/>
