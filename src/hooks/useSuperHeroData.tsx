@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query';
+import {useQuery, useQueryClient} from 'react-query';
 import axios from 'axios';
 
 const getSuperHeroData = async ({queryKey}: any) => {
@@ -10,5 +10,11 @@ const getSuperHeroData = async ({queryKey}: any) => {
 }
 
 export const useSuperHeroData = (id: string) => {
-    return useQuery(['super-hero',id],getSuperHeroData);
+    const queryClient = useQueryClient();
+
+    return useQuery(['super-hero',id],getSuperHeroData,{
+        initialData: () => {
+            
+        }
+    });
 }

@@ -2,11 +2,14 @@ import {useQuery} from 'react-query';
 import axios from 'axios';
 
 const fetchUserByEmail = async (email: string) => {
-    return await axios.get(`http://localhost:4000/users/${email}`);
+    
+     const {data} = await axios.get(`http://localhost:4000/users/${email}`);
+     return data;
 }
 
 const fetchCoursesByChannelId = async (channelId: string) => {
-    return await axios.get(`http://localhost:4000/channels/${channelId}`);
+    const {data} = await axios.get(`http://localhost:4000/channels/${channelId}`);
+    return data;
 }
 
 type Email = {
@@ -16,18 +19,18 @@ type Email = {
 export default function({email}: Email){
 
     const {data: user} = useQuery(['user',email],() => fetchUserByEmail(email));
-    const channelId = user?.data?.channelId;
+    const channelId = user?.channelId;
     
-    const {data: courses} = useQuery(['courses',channelId], () => fetchCoursesByChannelId(channelId),{
+    const {data: channels} = useQuery(['courses',channelId], () => fetchCoursesByChannelId(channelId),{
         enabled: !!channelId
     });
 
     return (
         <div>
             {
-                courses?.data?.courses.map((course: any) => {
+                channels?.courses.map((course: any) => {
                     return (
-                        <div>
+                        <div key={course}>
                             {
                                 course
                             }
