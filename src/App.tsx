@@ -8,6 +8,7 @@ import { ParallelQueryPage } from './components/ParallelQuery.page';
 import DependentQueryPage from './components/DependentQuery.page';
 import PaginatedQueryPage from './components/PaginatedQuery.page';
 import InfiniteQueryPage from './components/InfiniteQuery.page';
+import MutationQueryPage from './components/mutationQuery.page';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             </ul>
           </nav>
           <Routes>
+            <Route path='/rq-mutation' element={<MutationQueryPage></MutationQueryPage>}></Route>
             <Route path='/rq-infinite' element={<InfiniteQueryPage></InfiniteQueryPage>}></Route>
             <Route path='/rq-paginated' element={<PaginatedQueryPage></PaginatedQueryPage>}></Route>
             <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage></RQSuperHeroPage>}></Route>
