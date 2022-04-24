@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useMutationData } from "../hooks/useMutationData"
+import { useQueryClient } from "react-query";
 import axios from "axios";
 
 const fetchHeroes = async () => {
@@ -11,7 +12,7 @@ const fetchHeroes = async () => {
 export default function MutationQueryPage(){
     const {mutate} = useMutationData();
     const {data, refetch} = useQuery<{id:number,name:string,alterEgo:string}[],any>('fetch-heroes',fetchHeroes,{
-        enabled: false
+        
     });
 
     const [info,setInfo] = useState({

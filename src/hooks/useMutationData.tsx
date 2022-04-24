@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 export const sendData = async (data: any) => {
     return await axios.post('http://localhost:4000/superheroes',
@@ -8,5 +8,10 @@ export const sendData = async (data: any) => {
 }
 
 export const useMutationData = () => {
-    return useMutation(sendData);
+    const queryClient = useQueryClient();
+    return useMutation(sendData,{
+        onSuccess: () => {
+            queryClient.invalidateQueries('fetch-heroes')
+        }
+    });
 }
