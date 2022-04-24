@@ -8,6 +8,6 @@ const getPaginatedData = async (pageNumber: number) => {
 
 export const usePaginatedData = (pageNumber: number) => {
     return useQuery<{id:number,label:string}[],any>(['pagination',pageNumber],() => getPaginatedData(pageNumber),{
-        keepPreviousData: true
-    });
+        keepPreviousData: true,
+    }); 
 }
