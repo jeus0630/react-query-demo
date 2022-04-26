@@ -10,8 +10,17 @@ export const sendData = async (data: any) => {
 export const useMutationData = () => {
     const queryClient = useQueryClient();
     return useMutation(sendData,{
-        onSuccess: () => {
-            queryClient.invalidateQueries('fetch-heroes')
-        }
+        onSuccess: ({data}) => {
+            
+            
+            // queryClient.invalidateQueries('fetch-heroes')
+            queryClient.setQueriesData('fetch-heroes',(oldQueryData: any) => {
+                return [
+                    ...oldQueryData,
+                    data
+                ]
+                
+            })
+        },
     });
 }

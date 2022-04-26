@@ -14,7 +14,7 @@ export default function MutationQueryPage(){
     const {data, refetch} = useQuery<{id:number,name:string,alterEgo:string}[],any>('fetch-heroes',fetchHeroes,{
         
     });
-
+    
     const [info,setInfo] = useState({
         name: '',
         alterEgo: ''
